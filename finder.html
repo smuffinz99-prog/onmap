@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OnMap â€” Email Finder</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body{background:var(--soft)}
+  .page{max-width:1080px;margin:0 auto;padding:30px 22px 70px}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+  .head h1{font-size:1.7rem}.head p{color:var(--muted)}
+  .searchbar{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:24px}
+  .searchbar form{display:flex;gap:12px;flex-wrap:wrap}
+  .searchbar input{flex:1;min-width:200px;padding:14px;border:1px solid var(--line);border-radius:11px;font:inherit}
+  .searchbar .hint{color:var(--muted);font-size:.85rem;margin-top:10px}
+  .statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+  @media(max-width:760px){.statrow{grid-template-columns:1fr 1fr}}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+  .stat .n{font-size:1.8rem;font-weight:800}.stat .l{color:var(--muted);font-size:.85rem}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+  .toolbar h2{font-size:1.1rem}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);font-size:.92rem;vertical-align:top}
+  th{background:var(--soft);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  tr:last-child td{border-bottom:0}
+  .need{display:inline-block;min-width:34px;text-align:center;font-weight:700;padding:3px 8px;border-radius:7px;color:#fff;font-size:.8rem}
+  .email-cell{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.86rem}
+  .copy{cursor:pointer;color:var(--accent);font-weight:600;font-size:.82rem;border:0;background:none;padding:0;margin-left:6px}
+  .gap{color:var(--muted);font-size:.84rem}
+  .spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:s .7s linear infinite;vertical-align:-3px}
+  @keyframes s{to{transform:rotate(360deg)}}
+  .muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <div><div class="brand" style="margin-bottom:6px"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></span>OnMap</div>
+    <h1>Email Finder</h1><p>Find local businesses that need a website &amp; their email â€” for outreach.</p></div>
+    <a class="btn btn-dark" href="dashboard.html">Dashboard â†’</a>
+  </div>
+
+  <div class="searchbar">
+    <form id="findForm">
+      <input name="area" placeholder="Type an Australian town, e.g. Geelong, Toowoomba, Dubbo..." required>
+      <button class="btn btn-primary" type="submit" id="findBtn">Find businesses</button>
+    </form>
+    <div class="hint" id="hint">Searches OpenStreetMap for real businesses, scrapes their email, and audits their website. Takes ~30â€“60 seconds per town.</div>
+  </div>
+
+  <div class="statrow" id="stats"></div>
+
+  <div class="toolbar">
+    <h2>Emailable prospects <span class="muted" id="count"></span></h2>
+    <button class="btn btn-dark" id="copyAll" style="padding:9px 16px;font-size:.9rem">Copy all emails</button>
+  </div>
+  <div style="overflow-x:auto"><table id="tbl"><thead><tr>
+    <th>Need</th><th>Business</th><th>Town</th><th>Email</th><th>Biggest gap (your pitch)</th>
+  </tr></thead><tbody id="rows"></tbody></table></div>
+</div>
+
+<script>
+function needColour(n){return n>=50?'#dc2626':(n>=30?'#d97706':'#16a34a');}
+let allEmails=[];
+
+async function load(){
+  const d=await (await fetch('/api/prospects?channel=email&limit=300')).json();
+  const s=d.stats||{};
+  document.getElementById('stats').innerHTML=[
+    {n:s.total||0,l:'Businesses found'},{n:s.emailable||0,l:'With an email'},
+    {n:s.no_website||0,l:'No website at all'},{n:s.suburbs||0,l:'Towns searched'}
+  ].map(c=>`<div class="stat"><div class="n">${c.n}</div><div class="l">${c.l}</div></div>`).join('');
+  const rows=d.prospects||[];
+  allEmails=rows.map(r=>r.email).filter(Boolean);
+  document.getElementById('count').textContent='('+rows.length+')';
+  document.getElementById('rows').innerHTML=rows.map(r=>`<tr>
+    <td><span class="need" style="background:${needColour(r.need)}">${r.need}</span></td>
+    <td><b>${r.business}</b><br><span class="muted" style="font-size:.82rem">${r.category||''}${r.website?' Â· has site':' Â· no site'}</span></td>
+    <td>${r.suburb}</td>
+    <td class="email-cell">${r.email}<button class="copy" onclick="navigator.clipboard.writeText('${r.email}');this.textContent='âœ“'">copy</button></td>
+    <td class="gap">${r.top_gap||'â€”'}</td></tr>`).join('') || '<tr><td colspan="5" class="muted" style="padding:24px">No emailable prospects yet â€” search a town above.</td></tr>';
+}
+
+document.getElementById('findForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=document.getElementById('findBtn'); const area=e.target.area.value.trim();
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span> Searching '+area+'...';
+  document.getElementById('hint').textContent='Searching '+area+' â€” this can take up to a minute, hang tight...';
+  try{
+    const r=await fetch('/api/find',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({area})});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.detail||'failed');
+    document.getElementById('hint').textContent=`Found ${d.found} businesses in ${area}, ${d.emailable} with an email. Added to your list below.`;
+    e.target.area.value='';
+    await load();
+  }catch(err){ document.getElementById('hint').textContent='Could not search '+area+': '+err.message; }
+  btn.disabled=false; btn.textContent='Find businesses';
+});
+
+document.getElementById('copyAll').addEventListener('click',function(){
+  navigator.clipboard.writeText(allEmails.join('\n'));
+  this.textContent='Copied '+allEmails.length+' emails âœ“';
+  setTimeout(()=>this.textContent='Copy all emails',2000);
+});
+
+load();
+</script>
+</body>
+</html>
+

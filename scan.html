@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is your business invisible on Google? â€” Free check | OnMap</title>
+<meta name="description" content="Free 30-second check: see how visible your local business is on Google â€” and get a free website preview on the spot.">
+<link rel="stylesheet" href="style.css">
+<style>
+  .scanwrap{max-width:640px;margin:-56px auto 0;position:relative;z-index:2}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:32px}
+  .panel form{display:grid;gap:14px}
+  .panel label{font-weight:600;font-size:.9rem;margin-bottom:-7px}
+  .panel input{padding:14px;border:1px solid var(--line);border-radius:11px;font:inherit;width:100%}
+  .panel input:focus{outline:2px solid var(--accent);border-color:transparent}
+  .panel .btn{width:100%;margin-top:6px}
+  .result{display:none;margin-top:24px}
+  .gauge{border-radius:18px;padding:30px;text-align:center;color:#fff}
+  .gauge .score{font-size:4rem;font-weight:800;line-height:1}
+  .gauge .label{opacity:.85;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+  .gauge .verdict{margin-top:10px;font-size:1.1rem;font-weight:600}
+  .gaps{margin:22px 0}
+  .gaps h3{font-size:1rem;margin-bottom:14px}
+  .gaps .row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .gaps .row svg{width:20px;height:20px;color:var(--bad);flex:none;margin-top:2px}
+  .gaps .row.ok svg{color:var(--good)}
+  .gaps .row p{color:var(--muted);font-size:.96rem}
+  .cta-block .btn{width:100%;margin-bottom:10px}
+  .fineprint{color:var(--muted);font-size:.82rem;margin-top:14px;text-align:center}
+</style>
+</head>
+<body>
+
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>OnMap</a>
+  <nav class="nav"><a href="/#how">How it works</a><a href="/#pricing">Pricing</a></nav>
+  <a class="btn btn-primary" href="/#pricing">Get started</a>
+</div></header>
+
+<section class="hero" style="padding-bottom:90px"><div class="wrap" style="padding-bottom:40px">
+  <span class="eyebrow">Free Â· 30 seconds Â· no signup</span>
+  <h1 style="font-size:2.7rem">Is your business invisible on Google?</h1>
+  <p class="sub">Find out how visible you are right now â€” and we'll build you a free website preview on the spot.</p>
+</div></section>
+
+<div class="scanwrap"><div class="panel">
+  <form id="scanForm">
+    <label>Business name *</label>
+    <input name="business_name" required placeholder="e.g. Joe's Plumbing">
+    <label>What do you do?</label>
+    <input name="category" placeholder="e.g. plumber, cafe, hairdresser">
+    <label>Suburb</label>
+    <input name="suburb" placeholder="e.g. Northgate QLD">
+    <label>Phone (optional)</label>
+    <input name="phone" placeholder="e.g. 0412 345 678">
+    <label>Website (leave blank if you don't have one)</label>
+    <input name="website_url" placeholder="https://...">
+    <button class="btn btn-primary" type="submit">Check my visibility â€” free</button>
+    <p class="fineprint">No spam. We use this to build your free preview and may follow up once. Unsubscribe anytime.</p>
+  </form>
+
+  <div class="result" id="result">
+    <div class="gauge" id="gauge">
+      <div class="score" id="score">--</div>
+      <div class="label">Visibility score</div>
+      <div class="verdict" id="verdict"></div>
+    </div>
+    <div class="gaps"><h3>What we found</h3><div id="gaps"></div></div>
+    <div class="cta-block">
+      <a id="demoLink" class="btn btn-primary" href="#" target="_blank">See the free website we just built you â†’</a>
+      <a class="btn btn-dark" href="/#pricing">Make it live from $79/mo</a>
+    </div>
+  </div>
+</div></div>
+
+<footer class="site" style="margin-top:60px"><div class="wrap">
+  <div class="copy"><span>&copy; OnMap Â· Australia</span><span><a href="privacy.html">Privacy</a></span></div>
+</div></footer>
+
+<script>
+const ALERT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+
+// Mirror of the server-side visibility_report, so the tool still works on static hosting.
+function localReport(d){
+  const hasSite=!!(d.website_url||'').trim(); let score=100; const gaps=[];
+  if(!hasSite){ score-=55; gaps.push(
+    "No website - customers who search for you find nothing (or find a competitor).",
+    "You can't be found on Google Search, only maybe on Maps.",
+    "No way for customers to enquire or book online, day or night."); }
+  else { score-=10; gaps.push("You have a website - we'll check it loads fast and works on mobile."); }
+  if(!(d.phone||'').trim()){ score-=10; gaps.push("No click-to-call number listed for mobile customers."); }
+  score=Math.max(15,Math.min(100,score));
+  const verdict = score<40 ? "Nearly invisible. Customers searching right now can't find you."
+    : score<70 ? "Hard to find. You're leaving enquiries on the table."
+    : "Decent presence - but there's room to capture more.";
+  return {score,verdict,gaps};
+}
+
+function show(r,demoUrl){
+  document.getElementById('score').textContent=r.score;
+  document.getElementById('verdict').textContent=r.verdict;
+  const colour=r.score<40?'#dc2626':(r.score<70?'#d97706':'#16a34a');
+  document.getElementById('gauge').style.background='linear-gradient(150deg,'+colour+',#0b1220 160%)';
+  document.getElementById('gaps').innerHTML=r.gaps.map(g=>'<div class="row">'+ALERT+'<p>'+g+'</p></div>').join('');
+  const dl=document.getElementById('demoLink');
+  if(demoUrl){ dl.href=demoUrl; dl.style.display=''; }
+  else { dl.style.display='none'; }
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+
+document.getElementById('scanForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const btn=e.target.querySelector('button'); btn.disabled=true; btn.textContent='Checking...';
+  const data=Object.fromEntries(new FormData(e.target));
+  try{
+    const res=await fetch('/api/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    if(!res.ok) throw new Error('no backend');
+    const out=await res.json(); show(out.report,out.demo_url);
+  }catch(err){
+    // Static hosting: no backend. Compute the report in the browser instead.
+    show(localReport(data), null);
+  }
+  btn.disabled=false; btn.textContent='Check my visibility â€” free';
+});
+</script>
+</body>
+</html>
+
