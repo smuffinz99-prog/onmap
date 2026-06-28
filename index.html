@@ -1,152 +1,525 @@
-﻿<!DOCTYPE html>
-<html lang="en-AU">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OnMap â€” Get your local business found & booked on Google</title>
-<meta name="description" content="We build local Australian businesses a professional website, optimise their Google presence, and turn searches into phone calls. Done for you, from $79/mo.">
-<link rel="stylesheet" href="style.css">
+<title>OnMap — Done-For-You Website & Google Presence for Local Businesses</title>
+<meta name="description" content="OnMap builds local businesses a professional website, optimises their Google Business Profile, and sends every enquiry straight to their phone. Done for you. From $79/mo.">
+<link rel="canonical" href="https://smuffinz99-prog.github.io/onmap/">
+<meta property="og:title" content="OnMap — Done-For-You Website & Google Presence">
+<meta property="og:description" content="We build your website, sort out your Google listing, and send enquiries to your phone. No effort required. From $79/mo.">
+<meta property="og:url" content="https://smuffinz99-prog.github.io/onmap/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OnMap — Done-For-You Website & Google Presence">
+<meta name="twitter:description" content="We build your website, sort out your Google listing, and send enquiries to your phone. No effort required. From $79/mo.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"OnMap","description":"OnMap builds local businesses a professional website and optimises their Google Business Profile so they get found and called by customers.","url":"https://smuffinz99-prog.github.io/onmap/","priceRange":"$79–$299/mo"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Do I need to do anything technical?","acceptedAnswer":{"@type":"Answer","text":"No. We build everything, host it, and keep it running. You approve the site and answer the phone when it rings."}},
+{"@type":"Question","name":"How fast can I be live?","acceptedAnswer":{"@type":"Answer","text":"Usually within 48 hours of you giving us the go-ahead. Often we've already built your site before you sign up."}},
+{"@type":"Question","name":"What if I already have a website?","acceptedAnswer":{"@type":"Answer","text":"We'll rebuild it better, or improve what you've got and take over the upkeep so it actually brings you customers."}},
+{"@type":"Question","name":"Is there a lock-in contract?","acceptedAnswer":{"@type":"Answer","text":"No lock-in. Month-to-month, cancel anytime."}}
+]}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090f;--surface:#0f1219;--surface2:#161b27;--border:#1e2535;
+  --text:#f0f4ff;--muted:#7a8499;--accent:#3b82f6;--accent2:#6366f1;
+  --green:#10b981;--yellow:#f59e0b;--red:#ef4444;--radius:12px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(7,9,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px}
+.logo{font-size:22px;font-weight:900;display:flex;align-items:center;gap:10px}
+.logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;gap:10px;align-items:center}
+.btn-nav{padding:9px 22px;border-radius:var(--radius);font-size:14px;font-weight:700;cursor:pointer;border:none}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-accent{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+@media(max-width:700px){.nav-links{display:none}}
+
+/* Announce */
+.announce{background:linear-gradient(90deg,var(--accent),var(--accent2));text-align:center;padding:11px;font-size:13px;font-weight:700;letter-spacing:.01em}
+
+/* Hero */
+.hero{padding:100px 40px 80px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 500px at 50% 0%,rgba(59,130,246,.12),transparent 70%);pointer-events:none}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);border-radius:100px;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:28px;text-transform:uppercase;letter-spacing:.08em}
+.hero h1{font-size:clamp(36px,6vw,72px);font-weight:900;line-height:1.06;margin-bottom:24px;letter-spacing:-1.5px;max-width:860px;margin-left:auto;margin-right:auto}
+.hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:19px;color:var(--muted);max-width:600px;margin:0 auto 44px;line-height:1.65}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.cta-main{padding:18px 44px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:var(--radius);font-size:17px;font-weight:800;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:none;box-shadow:0 0 40px -8px rgba(99,102,241,.5)}
+.cta-main:hover{opacity:.9}
+.cta-secondary{padding:18px 32px;background:transparent;border:1px solid var(--border);color:var(--text);border-radius:var(--radius);font-size:16px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.hero-note{font-size:13px;color:var(--muted)}
+
+/* Problem strip */
+.problem-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px}
+.problem-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.prob-item{display:flex;align-items:flex-start;gap:14px}
+.prob-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.prob-item p{font-size:14px;color:var(--muted);line-height:1.6}
+.prob-item p strong{color:var(--text)}
+
+/* Stats */
+.stats-band{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);max-width:1000px;margin:0 auto}
+.stat-box{background:var(--surface);padding:40px 24px;text-align:center}
+.stat-n{font-size:48px;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stat-l{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4}
+
+/* Section */
+.section{padding:88px 40px;max-width:1100px;margin:0 auto}
+.section-kicker{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+.section-title{font-size:clamp(28px,4vw,44px);font-weight:900;margin-bottom:16px;line-height:1.15}
+.section-sub{font-size:17px;color:var(--muted);max-width:580px;margin-bottom:52px;line-height:1.65}
+
+/* How it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:20px;overflow:hidden}
+.step{background:var(--surface);padding:40px 32px;position:relative}
+.step-num{font-size:13px;font-weight:800;color:var(--accent);background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.step h3{font-size:19px;font-weight:800;margin-bottom:10px}
+.step p{font-size:14px;color:var(--muted);line-height:1.7}
+.step-arrow{position:absolute;top:50%;right:-14px;transform:translateY(-50%);width:28px;height:28px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;font-size:14px}
+
+/* What you get */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:30px;transition:border-color .2s}
+.feat-card:hover{border-color:var(--accent)}
+.feat-icon{font-size:32px;margin-bottom:16px}
+.feat-card h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.feat-card p{font-size:14px;color:var(--muted);line-height:1.65}
+.feat-included{display:inline-flex;align-items:center;gap:4px;margin-top:14px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+
+/* Before / After */
+.ba-wrap{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:48px}
+.ba-header{display:grid;grid-template-columns:1fr 1fr;background:var(--surface2)}
+.ba-col-head{padding:16px 28px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
+.ba-col-head.bad{color:var(--red)}
+.ba-col-head.good{color:var(--green)}
+.ba-body{display:grid;grid-template-columns:1fr 1fr}
+.ba-col{padding:28px}
+.ba-col+.ba-col{border-left:1px solid var(--border)}
+.ba-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;font-size:14px;color:var(--muted);line-height:1.5}
+.ba-item .ic{flex-shrink:0;margin-top:2px;font-size:15px}
+.ba-item strong{color:var(--text)}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1000px;margin:48px auto 0}
+.plan{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px;position:relative}
+.plan.featured{border-color:var(--accent);background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(99,102,241,.06))}
+.plan-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:11px;font-weight:800;padding:4px 16px;border-radius:100px;white-space:nowrap}
+.plan-name{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
+.plan-price{font-size:52px;font-weight:900;line-height:1;margin-bottom:4px}
+.plan-price small{font-size:18px;font-weight:600;color:var(--muted)}
+.plan-period{font-size:13px;color:var(--muted);margin-bottom:20px}
+.plan-desc{font-size:14px;color:var(--muted);padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:24px;line-height:1.6}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.plan-feats li{font-size:14px;display:flex;gap:10px;align-items:flex-start;color:var(--muted)}
+.plan-feats li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0}
+.plan-cta{display:block;width:100%;padding:14px;text-align:center;border-radius:var(--radius);font-size:15px;font-weight:800;cursor:pointer;border:none}
+.plan-cta-outline{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.plan-cta-pro{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+
+/* Reviews */
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:40px}
+.review{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px}
+.stars{color:var(--yellow);font-size:15px;margin-bottom:12px}
+.review-text{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+.reviewer{display:flex;align-items:center;gap:10px}
+.reviewer-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.reviewer-name{font-size:13px;font-weight:700}
+.reviewer-detail{font-size:12px;color:var(--muted)}
+
+/* FAQ */
+.faq-wrap{max-width:720px;margin:40px auto 0}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;text-align:left;padding:22px 0;background:none;border:none;color:var(--text);font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q::after{content:'＋';font-size:20px;color:var(--accent);flex-shrink:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;font-size:14px;color:var(--muted);line-height:1.75}
+.faq-item.open .faq-q::after{content:'－'}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:22px}
+
+/* CTA Banner */
+.cta-banner{background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(99,102,241,.12));border:1px solid rgba(59,130,246,.25);border-radius:24px;padding:72px 40px;text-align:center;max-width:1020px;margin:0 auto 80px}
+.cta-banner h2{font-size:clamp(28px,4vw,46px);font-weight:900;margin-bottom:16px}
+.cta-banner p{font-size:17px;color:var(--muted);margin-bottom:36px}
+
+/* Footer */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:56px 40px 40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;max-width:1100px;margin:0 auto 40px}
+.footer-logo{font-size:20px;font-weight:900;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.footer-brand p{font-size:13px;color:var(--muted);max-width:260px;line-height:1.65}
+.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:16px}
+.footer-col a{display:block;font-size:13px;color:var(--muted);margin-bottom:10px}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{text-align:center;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:24px;max-width:1100px;margin:0 auto}
+
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .hero{padding:60px 20px 48px}
+  .section{padding:60px 20px}
+  .stats-band{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+  .step-arrow{display:none}
+  .ba-header,.ba-body{grid-template-columns:1fr}
+  .ba-col+.ba-col{border-left:none;border-top:1px solid var(--border)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .cta-banner{padding:48px 24px}
+}
+</style>
 </head>
 <body>
 
-<header class="site"><div class="wrap">
-  <a class="brand" href="index.html"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>OnMap</a>
-  <nav class="nav">
+<div class="announce">🗺️ Live in 48 hours &nbsp;·&nbsp; No tech skills needed &nbsp;·&nbsp; Cancel anytime</div>
+
+<nav>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </div>
+    OnMap
+  </div>
+  <div class="nav-links">
     <a href="#how">How it works</a>
-    <a href="#features">What's included</a>
+    <a href="#what-you-get">What's included</a>
     <a href="#pricing">Pricing</a>
     <a href="scan.html">Free check</a>
-  </nav>
-  <a class="btn btn-primary" href="#pricing">Get started</a>
-</div></header>
-
-<section class="hero"><div class="wrap">
-  <span class="eyebrow">For Aussie local businesses</span>
-  <h1>Get found on Google. Get the call.</h1>
-  <p class="sub">We build you a fast, professional website, sort out your Google presence, and send every enquiry straight to your phone. You just approve it.</p>
-  <div class="cta">
-    <a class="btn btn-light" href="#pricing">See pricing â€” from $79/mo</a>
-    <a class="btn btn-ghost" href="scan.html">Check my visibility â€” free</a>
   </div>
-  <p class="note">No lock-in contracts Â· Live in 48 hours Â· Cancel anytime</p>
-</div></section>
-
-<section><div class="wrap">
-  <div class="stats">
-    <div class="stat reveal"><div class="big">48hrs</div><p>From sign-up to your site being live</p></div>
-    <div class="stat reveal"><div class="big">$0</div><p>Effort required from you â€” we do it all</p></div>
-    <div class="stat reveal"><div class="big">95%</div><p>Of searches for local services start on Google</p></div>
+  <div class="nav-right">
+    <a href="#pricing"><button class="btn-nav btn-outline">See pricing</button></a>
+    <a href="scan.html"><button class="btn-nav btn-accent">Free visibility check →</button></a>
   </div>
-</div></section>
+</nav>
 
-<section class="soft" id="how"><div class="wrap">
-  <div class="shead"><span class="kicker">How it works</span>
-    <h2>Online in three simple steps</h2>
-    <p>No tech skills, no agencies, no hassle. We come to you with the work already done.</p></div>
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-kicker">Done-for-you local business presence</div>
+  <h1>Your business, <span class="grad">found on Google.</span><br>Calls to your phone.</h1>
+  <p class="hero-sub">OnMap builds you a fast professional website, sorts out your Google Business Profile, and routes every enquiry straight to your phone — you don't lift a finger.</p>
+  <div class="hero-ctas">
+    <a href="#pricing"><button class="cta-main">Get started — from $79/mo →</button></a>
+    <a href="scan.html"><button class="cta-secondary">Check my visibility free</button></a>
+  </div>
+  <p class="hero-note">No lock-in contracts &nbsp;·&nbsp; Live in 48 hours &nbsp;·&nbsp; We do everything</p>
+</div>
+
+<!-- Problem strip -->
+<div class="problem-strip">
+  <div class="problem-inner">
+    <div class="prob-item">
+      <span class="prob-icon">🔍</span>
+      <p><strong>95% of local searches start on Google</strong> — if your business isn't showing up, those customers are calling your competitors.</p>
+    </div>
+    <div class="prob-item">
+      <span class="prob-icon">🕸️</span>
+      <p><strong>No website = no trust</strong> — customers check you online before they call. A bad (or missing) site costs you jobs every week.</p>
+    </div>
+    <div class="prob-item">
+      <span class="prob-icon">⏱️</span>
+      <p><strong>You don't have time to deal with this</strong> — you're running a business. OnMap handles the whole thing so you never have to think about it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-band">
+  <div class="stat-box"><div class="stat-n">48h</div><div class="stat-l">From sign-up to your site being live</div></div>
+  <div class="stat-box"><div class="stat-n">$0</div><div class="stat-l">Effort required from you</div></div>
+  <div class="stat-box"><div class="stat-n">95%</div><div class="stat-l">Of local searches start on Google</div></div>
+  <div class="stat-box"><div class="stat-n">3x</div><div class="stat-l">More calls vs. no Google presence</div></div>
+</div>
+
+<!-- How it works -->
+<div class="section" id="how">
+  <div class="section-kicker">How it works</div>
+  <div class="section-title">Online in 3 simple steps</div>
+  <p class="section-sub">No tech skills, no agencies, no back-and-forth. We do the work upfront and come to you with it already done.</p>
+
   <div class="steps">
-    <div class="step reveal"><div class="n">1</div><h3>We build it</h3>
-      <p>We create your website from your business details â€” before you even ask. You get a link to a finished site.</p></div>
-    <div class="step reveal"><div class="n">2</div><h3>You approve</h3>
-      <p>Like it? We push it live on your own domain and optimise your Google profile. Tweaks are free.</p></div>
-    <div class="step reveal"><div class="n">3</div><h3>You get calls</h3>
-      <p>We keep you showing up in local searches and send every enquiry straight to your phone.</p></div>
-  </div>
-</div></section>
-
-<section id="features"><div class="wrap">
-  <div class="shead"><span class="kicker">What's included</span>
-    <h2>Everything you need to be found</h2>
-    <p>One simple subscription covers the lot â€” no surprise invoices.</p></div>
-  <div class="grid g3">
-    <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-      <h3>Professional website</h3><p>A fast, mobile-friendly site that looks great and makes you look the part â€” built and hosted for you.</p></div>
-    <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-      <h3>Google presence</h3><p>We optimise your Google Business Profile and local SEO so people in your area actually find you.</p></div>
-    <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-      <h3>Calls &amp; enquiries</h3><p>A click-to-call button and enquiry form send leads straight to your phone â€” day or night.</p></div>
-    <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <h3>Reviews on autopilot</h3><p>We help you collect more 5-star Google reviews automatically, so you stand out from competitors.</p></div>
-    <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-      <h3>Monthly reporting</h3><p>A simple plain-English report each month: how many people found you and got in touch.</p></div>
-    <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h3>We handle everything</h3><p>Updates, hosting, security, content â€” all done for you. Zero effort, zero tech headaches.</p></div>
-  </div>
-</div></section>
-
-<section class="soft" id="pricing"><div class="wrap">
-  <div class="shead"><span class="kicker">Pricing</span>
-    <h2>Simple monthly pricing</h2>
-    <p>Pick a plan, we do the rest. No setup fees, no lock-in.</p></div>
-  <div class="prices">
-    <div class="price reveal">
-      <h3>Starter</h3><div class="amt">$79<small>/mo</small></div>
-      <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Hosted professional website</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Google Business optimisation</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly content refresh</li>
-      </ul>
-      <button class="btn btn-dark" data-plan="starter">Choose Starter</button>
+    <div class="step" style="position:relative">
+      <div class="step-num">1</div>
+      <h3>We build your site</h3>
+      <p>You tell us your business name, what you do, and where you're based. We build you a fast, professional, mobile-friendly website — fully written and designed. We send you a link to review it.</p>
+      <div class="step-arrow" style="display:none">→</div>
     </div>
-    <div class="price featured reveal">
-      <span class="pop">Most popular</span>
-      <h3>Growth</h3><div class="amt">$149<small>/mo</small></div>
-      <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Booking &amp; lead capture</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Review automation</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Local SEO pages + reporting</li>
-      </ul>
-      <button class="btn btn-primary" data-plan="growth">Choose Growth</button>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>We go live & set up Google</h3>
+      <p>Happy with the site? We push it live on your own domain, connect your Google Business Profile, and optimise it so your business shows up when people search for what you do nearby.</p>
     </div>
-    <div class="price reveal">
-      <h3>Pro</h3><div class="amt">$299<small>/mo</small></div>
-      <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Growth</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Multiple locations / services</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Call tracking</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority content &amp; support</li>
-      </ul>
-      <button class="btn btn-dark" data-plan="pro">Choose Pro</button>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Calls come to you</h3>
+      <p>Every enquiry — phone call, contact form, booking request — goes straight to your phone or inbox. We keep your listing fresh and your site updated. You just run your business.</p>
     </div>
   </div>
-</div></section>
+</div>
 
-<section><div class="wrap">
-  <div class="shead"><span class="kicker">FAQ</span><h2>Questions, answered</h2></div>
-  <div class="faq">
-    <details><summary>Do I need to do anything technical?</summary><div class="body">No. We build everything, host it, and keep it running. You just approve the site and answer the phone when it rings.</div></details>
-    <details><summary>What if I already have a website?</summary><div class="body">Great â€” we'll rebuild it better, or improve what you've got and take over the upkeep so it actually brings you customers.</div></details>
-    <details><summary>Is there a lock-in contract?</summary><div class="body">No lock-in. It's month-to-month and you can cancel anytime. We'd rather earn your business each month.</div></details>
-    <details><summary>How fast can I be live?</summary><div class="body">Usually within 48 hours of you giving us the go-ahead. Often we've already built your site before you sign up.</div></details>
+<!-- What you get -->
+<div class="section" id="what-you-get" style="padding-top:0">
+  <div class="section-kicker">What's included</div>
+  <div class="section-title">Everything your business needs to get found</div>
+  <p class="section-sub">One subscription covers the lot — no surprise invoices, no extra agencies to deal with.</p>
+
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🌐</div>
+      <h3>Professional Website</h3>
+      <p>A fast, mobile-friendly site that looks credible and makes customers trust you before they even pick up the phone. Written, designed, hosted, and maintained by us.</p>
+      <span class="feat-included">✓ All plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📍</div>
+      <h3>Google Business Profile</h3>
+      <p>We claim, optimise, and manage your Google Business listing so you appear in the local map pack when customers search for your service in your area.</p>
+      <span class="feat-included">✓ All plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📞</div>
+      <h3>Calls & Enquiries Routed to You</h3>
+      <p>Click-to-call buttons, contact forms, and booking requests all go straight to your phone. You never miss a lead because they couldn't reach you.</p>
+      <span class="feat-included">✓ All plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⭐</div>
+      <h3>Review Generation</h3>
+      <p>We help you collect more 5-star Google reviews automatically — because more reviews means higher local search rankings and more customers choosing you over competitors.</p>
+      <span class="feat-included">✓ Growth & Pro</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📈</div>
+      <h3>Monthly Performance Report</h3>
+      <p>Plain-English summary each month: how many people found you, how many got in touch, and what we're doing to keep improving your visibility.</p>
+      <span class="feat-included">✓ All plans</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🛡️</div>
+      <h3>We Handle Everything</h3>
+      <p>Site updates, hosting, security, content refreshes, Google listing maintenance — all done for you. Zero tech headaches, zero effort on your end.</p>
+      <span class="feat-included">✓ All plans</span>
+    </div>
   </div>
-</div></section>
+</div>
 
-<section style="padding-bottom:84px"><div class="ctaband reveal">
-  <h2>Ready to get found?</h2>
-  <p>See how visible your business is right now â€” free, in 30 seconds.</p>
-  <a class="btn btn-light" href="scan.html">Check my visibility</a>
-</div></section>
+<!-- Before / After -->
+<div class="section" style="padding-top:0">
+  <div class="section-kicker">Before vs After</div>
+  <div class="section-title">What no online presence is costing you</div>
+  <p class="section-sub">Most local businesses are invisible online — or have a site that actively loses them customers. Here's what OnMap changes.</p>
 
-<footer class="site"><div class="wrap">
-  <div class="top">
-    <div class="brand" style="font-size:1.3rem">OnMap</div>
-    <nav><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="scan.html">Free check</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
+  <div class="ba-wrap">
+    <div class="ba-header">
+      <div class="ba-col-head bad">❌ Without OnMap</div>
+      <div class="ba-col-head good">✓ With OnMap</div>
+    </div>
+    <div class="ba-body">
+      <div class="ba-col">
+        <div class="ba-item"><span class="ic">😞</span><p>Customer searches "plumber near me" — you don't show up, they call someone else</p></div>
+        <div class="ba-item"><span class="ic">📵</span><p>No website means customers can't verify you're legit — they move on</p></div>
+        <div class="ba-item"><span class="ic">📬</span><p>Enquiries slip through the cracks because there's no clear way to contact you</p></div>
+        <div class="ba-item"><span class="ic">😕</span><p>Only 2 Google reviews — competitors with 40+ reviews win every time</p></div>
+        <div class="ba-item"><span class="ic">🤷</span><p>No idea how many potential customers you're losing each week</p></div>
+      </div>
+      <div class="ba-col">
+        <div class="ba-item"><span class="ic">📍</span><p><strong>You appear in the Google map pack</strong> for local searches in your area — customers find you first</p></div>
+        <div class="ba-item"><span class="ic">🌐</span><p><strong>Professional site builds trust instantly</strong> — customers see you're established and call with confidence</p></div>
+        <div class="ba-item"><span class="ic">📞</span><p><strong>Every enquiry routes to your phone</strong> — click-to-call, contact form, booking — you never miss a lead</p></div>
+        <div class="ba-item"><span class="ic">⭐</span><p><strong>Automated review collection</strong> gets you 5-star reviews on autopilot — push you above competitors</p></div>
+        <div class="ba-item"><span class="ic">📊</span><p><strong>Monthly report shows you exactly</strong> how many people found you and what's working</p></div>
+      </div>
+    </div>
   </div>
-  <div class="copy"><span>&copy; OnMap Â· Australia</span><span>Get your local business found &amp; booked.</span></div>
-</div></footer>
+</div>
+
+<!-- Pricing -->
+<div class="section" id="pricing" style="text-align:center">
+  <div class="section-kicker">Pricing</div>
+  <div class="section-title">Simple. No surprises.</div>
+  <p class="section-sub" style="margin:0 auto 0">No setup fees. No lock-in. Cancel anytime.</p>
+
+  <div class="pricing-grid">
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">$79<small>/mo</small></div>
+      <div class="plan-period">billed monthly · cancel anytime</div>
+      <div class="plan-desc">Get found online. A proper website and Google presence that sends customers to you.</div>
+      <ul class="plan-feats">
+        <li>Professional hosted website</li>
+        <li>Google Business Profile optimisation</li>
+        <li>Click-to-call & contact form setup</li>
+        <li>Monthly content refresh</li>
+        <li>Monthly performance report</li>
+      </ul>
+      <button class="plan-cta plan-cta-outline" onclick="choosePlan('Starter',$79)">Get started →</button>
+    </div>
+
+    <div class="plan featured">
+      <div class="plan-badge">⭐ Most popular</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-price" style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">$149<small style="-webkit-text-fill-color:var(--muted)">/mo</small></div>
+      <div class="plan-period">billed monthly · cancel anytime</div>
+      <div class="plan-desc">Everything in Starter, plus bookings, lead capture, and reviews — the full package for businesses serious about growth.</div>
+      <ul class="plan-feats">
+        <li>Everything in Starter</li>
+        <li>Booking & lead capture forms</li>
+        <li>Automated review collection</li>
+        <li>Local SEO pages (suburb/service pages)</li>
+        <li>Detailed monthly ranking report</li>
+      </ul>
+      <button class="plan-cta plan-cta-pro" onclick="choosePlan('Growth',$149)">Get started →</button>
+    </div>
+
+    <div class="plan">
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">$299<small>/mo</small></div>
+      <div class="plan-period">billed monthly · cancel anytime</div>
+      <div class="plan-desc">For established businesses that want to dominate local search across multiple locations or service areas.</div>
+      <ul class="plan-feats">
+        <li>Everything in Growth</li>
+        <li>Multiple locations or service areas</li>
+        <li>Call tracking & lead attribution</li>
+        <li>Priority content & copywriting</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <button class="plan-cta plan-cta-outline" onclick="choosePlan('Pro',$299)">Get started →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reviews -->
+<div class="section">
+  <div class="section-kicker">Results</div>
+  <div class="section-title">Local businesses getting found and getting calls</div>
+  <div class="review-grid">
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"I had no website and wasn't showing up on Google at all. Within a week of OnMap going live, I got 3 new jobs just from people finding me in search. The site looks really professional too."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">DH</div>
+        <div>
+          <div class="reviewer-name">Dan H.</div>
+          <div class="reviewer-detail">Electrician · Melbourne</div>
+        </div>
+      </div>
+    </div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"I was sceptical but the turnaround was incredible — my site was live in less than 48 hours and they set up my Google profile at the same time. Calls have picked up noticeably. Worth every cent."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">SK</div>
+        <div>
+          <div class="reviewer-name">Sarah K.</div>
+          <div class="reviewer-detail">Hairdresser · Brisbane</div>
+        </div>
+      </div>
+    </div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"I don't know anything about websites or Google — I just wanted someone to handle it. OnMap does exactly that. I approved the site, they went live, and now people find me. Simple as that."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">MR</div>
+        <div>
+          <div class="reviewer-name">Mark R.</div>
+          <div class="reviewer-detail">Plumber · Sydney</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" id="faq" style="text-align:center;padding-bottom:48px">
+  <div class="section-kicker">FAQ</div>
+  <div class="section-title">Common questions</div>
+  <div class="faq-wrap">
+    <div class="faq-item">
+      <button class="faq-q">Do I need to do anything technical?</button>
+      <div class="faq-a">No. We build everything, host it, and keep it running. You tell us your business details, approve the site when it's ready, and answer the phone when it rings. That's it.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What exactly does OnMap build for me?</button>
+      <div class="faq-a">We build a fast, professionally written and designed website specific to your business. We also claim and optimise your Google Business Profile so you appear in local search and Google Maps. On Growth and Pro plans, we also set up booking forms, automate review collection, and build location-specific SEO pages.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How fast can I be live?</button>
+      <div class="faq-a">Usually within 48 hours of you giving us the go-ahead. In many cases we build the site before you even sign up — you see a finished site from day one.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What if I already have a website?</button>
+      <div class="faq-a">We'll either rebuild it properly or take over maintaining and improving what you've got — whichever gets you the better result. We also improve your Google presence regardless.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is there a lock-in contract?</button>
+      <div class="faq-a">No lock-in. It's month-to-month and you can cancel anytime. We'd rather earn your business each month by actually getting you results.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What types of businesses does OnMap work for?</button>
+      <div class="faq-a">Any local service business — tradespeople (plumbers, electricians, builders), health and beauty (hairdressers, physios, dentists), hospitality, fitness, home services, legal and financial services, and more. If customers search locally for what you do, OnMap helps them find you.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Banner -->
+<div class="cta-banner">
+  <h2>Ready to get found and get the call?</h2>
+  <p>See exactly how visible your business is right now — free, in 30 seconds.</p>
+  <a href="scan.html"><button class="cta-main">Check my visibility — free →</button></a>
+  <p style="margin-top:16px;font-size:13px;color:var(--muted)">No account needed &nbsp;·&nbsp; Takes 30 seconds &nbsp;·&nbsp; Free for any local business</p>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="logo-icon" style="width:28px;height:28px;border-radius:7px">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        OnMap
+      </div>
+      <p>Done-for-you websites and Google presence for local businesses. Get found. Get calls. Zero effort.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Service</h4>
+      <a href="#how">How it works</a>
+      <a href="#what-you-get">What's included</a>
+      <a href="#pricing">Pricing</a>
+      <a href="scan.html">Free visibility check</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 OnMap &nbsp;&middot;&nbsp; Done-for-you websites and Google presence for local businesses.</div>
+</footer>
 
 <script>
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
-  const t=document.querySelector(a.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
-}));
-const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-document.querySelectorAll('button[data-plan]').forEach(b=>b.addEventListener('click',()=>{
-  const email=prompt('Enter your email to get started:'); if(!email)return;
-  const plan=b.dataset.plan;
-  window.location='mailto:smuffinz99@gmail.com?subject=OnMap '+plan+' plan&body=Hi, I%27d like to get started on the '+plan+' plan. My email is '+email;
-}));
+function choosePlan(plan, price) {
+  var email = prompt('Enter your email to get started with the ' + plan + ' plan ($' + price + '/mo):');
+  if (!email) return;
+  window.location = 'mailto:smuffinz99@gmail.com?subject=OnMap ' + plan + ' plan&body=Hi, I%27d like to get started on the ' + plan + ' plan ($' + price + '/mo). My email is ' + encodeURIComponent(email);
+}
+document.querySelectorAll('.faq-q').forEach(function(b){
+  b.addEventListener('click', function(){ this.closest('.faq-item').classList.toggle('open'); });
+});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
 </script>
 </body>
 </html>
-
